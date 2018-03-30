@@ -23,25 +23,25 @@ const calendar = (
     beforeNum =
       m === 0 ? monthDate[11] - theDay + 1 : monthDate[m - 1] - theDay + 1,
     text = "";
+    displayDate = ("" + (m + 1)).length === 1 ? `${y}.0${m + 1}` : `${y}.${m + 1}`;
 
-  document.getElementById("calendar__date").textContent =
-    ("" + (m + 1)).length === 1 ? `${y}.0${m + 1}` : `${y}.${m + 1}`;
+  document.getElementById("calendar__date").textContent = displayDate;
 
   for (let i = 0; i < 6; i++) {
     text += "<tr>";
     for (let j = 0; j < 7; j++) {
       if (i === 0 && j < theDay) {
-        text += `<td class="calendar__current--not" data-title="${i}${j}">${beforeNum}</td>`;
+        text += `<td class="calendar__current--not" data-title="${displayDate.slice(5) === '01' ? ''+(displayDate.slice(0,4) - 1) : displayDate.slice(0,4)}${displayDate.slice(5) === '01' ? '12' : displayDate.slice(5)-1}${beforeNum}">${beforeNum}</td>`;
         beforeNum++;
       } else if (i === 0 && theDay === 0) {
-        text += `<td class="calendar__current--not" data-title="${i}${j}">${beforeNum -
+        text += `<td class="calendar__current--not" data-title="${displayDate.slice(5) === '01' ? ''+(displayDate.slice(0,4) - 1) : displayDate.slice(0,4)}${displayDate.slice(5) === '01' ? '12' : displayDate.slice(5)-1}${beforeNum - 7}">${beforeNum -
           7}</td>`;
         beforeNum++;
       } else if (currentNum > lastDate) {
-        text += `<td class="calendar__current--not" data-title="${i}${j}">${nextNum}</td>`;
+        text += `<td class="calendar__current--not" data-title="${displayDate.slice(5) === '12' ? ''+(+displayDate.slice(0,4) + 1) : displayDate.slice(0,4)}${displayDate.slice(5) === '12' ? '01' : (''+(+displayDate.slice(5)+1)).length === 1 ? '0'+(+displayDate.slice(5)+1) : +displayDate.slice(5)+1}${(''+nextNum).length === 1 ? '0'+nextNum : nextNum}">${nextNum}</td>`;
         nextNum++;
       } else {
-        text += `<td class="calendar__currnet" data-title="${i}${j}">${currentNum}</td>`;
+        text += `<td class="calendar__currnet" data-title="${displayDate.slice(0,4)}${displayDate.slice(5)}${currentNum}">${currentNum}</td>`;
         currentNum++;
       }
     }
