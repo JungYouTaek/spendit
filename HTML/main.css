@@ -1,0 +1,43 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  width: 500px;
+  height: 500px;
+  border: 1px solid black;
+}
+input[type=date]::-webkit-inner-spin-button,
+input[type=date]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+.datepicker {
+  position: relative;
+  float: left;
+}
+
+.datepicker__input {
+  padding: 5px 10px;
+  height: 30px;
+  width: 150px;
+}
+
+.datepicker__btn {
+  position: absolute;
+  top: 4px;
+  right: 3px;
+  width: 25px;
+  height: 25px;
+  background: #fff;
+  pointer-events: none;
+}
+
+.datepicker__btn button {
+  border: none;
+  background: transparent;
+}
+
+.calendar__current--not {
+  color: gray
+}
