@@ -96,6 +96,45 @@ const calendar = (
         .textContent.slice(5)}-${date}`;
     }
   });
+
+  document.getElementById("calendar__num").addEventListener("mouseover", e => {
+    if (check) {
+      for (let i = +start[0]; i <= +e.target.dataset.title[0]; i++) {
+        for (let j = 0; j <= 6; j++) {
+          if (+e.target.dataset.title > +start) {
+            if (start[0] === e.target.dataset.title[0]) {
+              if (j > +start[1] && j <= +e.target.dataset.title[1]) {
+                document
+                  .getElementById("calendar__num")
+                  .children[i].children[j].classList.add("someclass");
+              }
+            } else {
+              if (
+                (i === +start[0] && j > +start[1]) ||
+                (i > +start[0] && i < +e.target.dataset.title[0]) ||
+                (i === +e.target.dataset.title[0] &&
+                  j <= +e.target.dataset.title[1])
+              ) {
+                document
+                  .getElementById("calendar__num")
+                  .children[i].children[j].classList.add("someclass");
+              }
+            }
+          }
+        }
+      }
+    }
+  });
+
+  document.getElementById("calendar__num").addEventListener("mouseout", e => {
+    if ( check ) {
+      for ( let i = 0; i <= 5; i++ ) {
+        for ( let j = 0; j <= 6; j++ ) {
+          document.getElementById('calendar__num').children[i].children[j].classList.remove('someclass')
+        }
+      }
+    }
+  });
 };
 calendar();
 
