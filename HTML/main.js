@@ -2,7 +2,7 @@
 //   document.getElementsByClassName("datepicker__input"),
 //   input => (input.value = new Date().toISOString().slice(0, 10))
 // );
-let check = 0, start;
+let check = 0, start, end;
 const calendar = (
   year = new Date().getFullYear(),
   month = new Date().getMonth()
@@ -27,21 +27,21 @@ const calendar = (
 
   document.getElementById("calendar__date").textContent = displayDate;
 
-  for (let i = 0; i < 6; i++) {
+  for (let i = 0; i <= 5; i++) {
     text += "<tr>";
-    for (let j = 0; j < 7; j++) {
+    for (let j = 0; j <= 6; j++) {
       if (i === 0 && j < theDay) {
-        text += `<td class="calendar__current--not" data-title="${displayDate.slice(5) === '01' ? ''+(displayDate.slice(0,4) - 1) : displayDate.slice(0,4)}${displayDate.slice(5) === '01' ? '12' : displayDate.slice(5)-1}${beforeNum}">${beforeNum}</td>`;
+        text += `<td class="calendar__current--not" data-title="${displayDate.slice(5) === '01' ? ''+(displayDate.slice(0,4) - 1) : displayDate.slice(0,4)}${displayDate.slice(5) === '01' ? '12' : (''+(+displayDate.slice(5)-1)).length === 1 ? '0'+(+displayDate.slice(5)-1) : +displayDate.slice(5)-1}${beforeNum}">${beforeNum}</td>`;
         beforeNum++;
       } else if (i === 0 && theDay === 0) {
-        text += `<td class="calendar__current--not" data-title="${displayDate.slice(5) === '01' ? ''+(displayDate.slice(0,4) - 1) : displayDate.slice(0,4)}${displayDate.slice(5) === '01' ? '12' : displayDate.slice(5)-1}${beforeNum - 7}">${beforeNum -
+        text += `<td class="calendar__current--not" data-title="${displayDate.slice(5) === '01' ? ''+(displayDate.slice(0,4) - 1) : displayDate.slice(0,4)}${displayDate.slice(5) === '01' ? '12' : (''+(+displayDate.slice(5)-1)).length === 1 ? '0'+(+displayDate.slice(5)-1) : +displayDate.slice(5)-1}${beforeNum - 7}">${beforeNum -
           7}</td>`;
         beforeNum++;
       } else if (currentNum > lastDate) {
         text += `<td class="calendar__current--not" data-title="${displayDate.slice(5) === '12' ? ''+(+displayDate.slice(0,4) + 1) : displayDate.slice(0,4)}${displayDate.slice(5) === '12' ? '01' : (''+(+displayDate.slice(5)+1)).length === 1 ? '0'+(+displayDate.slice(5)+1) : +displayDate.slice(5)+1}${(''+nextNum).length === 1 ? '0'+nextNum : nextNum}">${nextNum}</td>`;
         nextNum++;
       } else {
-        text += `<td class="calendar__currnet" data-title="${displayDate.slice(0,4)}${displayDate.slice(5)}${currentNum}">${currentNum}</td>`;
+        text += `<td class="calendar__currnet" data-title="${displayDate.slice(0,4)}${displayDate.slice(5)}${(''+currentNum).length === 1 ? '0'+currentNum : currentNum}">${currentNum}</td>`;
         currentNum++;
       }
     }
@@ -58,68 +58,66 @@ const calendar = (
   }
   document.getElementById("calendar__table").appendChild(child);
 
+  if ( start && end ) {
+    for ( let i = 0; i <= 5; i++ ) {
+      for ( let j = 0; j <= 6; j++ ) {
+        let title = document.getElementById("calendar__num").children[i].children[j].dataset.title;
+          if ( +start.dataset.title === +title || +end.dataset.title === +title ) {
+            document.getElementById("calendar__num")
+              .children[i].children[j].classList.add("checked")
+          } else if ( +start.dataset.title < +title && +end.dataset.title > +title ) {
+            document.getElementById("calendar__num")
+              .children[i].children[j].classList.add("period");
+          }
+      }
+    }
+  }
+
   child.addEventListener("click", e => {
     if (check === 0) {
       check++;
       for ( let i = 0; i <= 5; i++ ) {
         for ( let j = 0; j <= 6; j++ ) {
-          document.getElementById('calendar__num').children[i].children[j].classList.remove('someclass');
+          document.getElementById('calendar__num').children[i].children[j].classList.remove('period');
           document.getElementById('calendar__num').children[i].children[j].classList.remove('checked')
         }
       }
       e.target.setAttribute("class", "checked");
-      const date =
-        e.target.textContent.length === 1
-          ? "0" + e.target.textContent
-          : e.target.textContent;
       document.getElementsByClassName(
         "datepicker__input"
-      )[0].value = `${document
-        .getElementById("calendar__date")
-        .textContent.slice(0, 4)}-${document
-        .getElementById("calendar__date")
-        .textContent.slice(5)}-${date}`;
-      start = e.target.dataset.title;
+      )[0].value = `${e.target.dataset.title.slice(0,4)}-${e.target.dataset.title.slice(4,6)}-${e.target.dataset.title.slice(6)}`;
+      document.getElementsByClassName(
+        "datepicker__input"
+      )[1].value = '';
+      start = e.target;
+      end = '';
     } else {
-      check--;
-      e.target.setAttribute("class", "checked");
-      const date =
-        e.target.textContent.length === 1
-          ? "0" + e.target.textContent
-          : e.target.textContent;
-      document.getElementsByClassName(
-        "datepicker__input"
-      )[1].value = `${document
-        .getElementById("calendar__date")
-        .textContent.slice(0, 4)}-${document
-        .getElementById("calendar__date")
-        .textContent.slice(5)}-${date}`;
+      if ( +start.dataset.title < +e.target.dataset.title ) {
+        check--;
+        e.target.setAttribute("class", "checked");
+        document.getElementsByClassName(
+          "datepicker__input"
+        )[1].value = `${e.target.dataset.title.slice(0,4)}-${e.target.dataset.title.slice(4,6)}-${e.target.dataset.title.slice(6)}`;
+        end = e.target;
+      } else {
+        start.classList.remove("checked");
+        e.target.setAttribute("class", "checked");
+        start = e.target;
+        document.getElementsByClassName(
+          "datepicker__input"
+        )[0].value = `${e.target.dataset.title.slice(0,4)}-${e.target.dataset.title.slice(4,6)}-${e.target.dataset.title.slice(6)}`;
+      }
     }
   });
 
   document.getElementById("calendar__num").addEventListener("mouseover", e => {
     if (check) {
-      for (let i = +start[0]; i <= +e.target.dataset.title[0]; i++) {
+      for (let i = 0; i <= 5; i++) {
         for (let j = 0; j <= 6; j++) {
-          if (+e.target.dataset.title > +start) {
-            if (start[0] === e.target.dataset.title[0]) {
-              if (j > +start[1] && j <= +e.target.dataset.title[1]) {
-                document
-                  .getElementById("calendar__num")
-                  .children[i].children[j].classList.add("someclass");
-              }
-            } else {
-              if (
-                (i === +start[0] && j > +start[1]) ||
-                (i > +start[0] && i < +e.target.dataset.title[0]) ||
-                (i === +e.target.dataset.title[0] &&
-                  j <= +e.target.dataset.title[1])
-              ) {
-                document
-                  .getElementById("calendar__num")
-                  .children[i].children[j].classList.add("someclass");
-              }
-            }
+          let title = document.getElementById("calendar__num").children[i].children[j].dataset.title;
+          if ( +start.dataset.title < +title && +e.target.dataset.title >= +title ) {
+            document.getElementById("calendar__num")
+              .children[i].children[j].classList.add("period");
           }
         }
       }
@@ -130,7 +128,7 @@ const calendar = (
     if ( check ) {
       for ( let i = 0; i <= 5; i++ ) {
         for ( let j = 0; j <= 6; j++ ) {
-          document.getElementById('calendar__num').children[i].children[j].classList.remove('someclass')
+          document.getElementById('calendar__num').children[i].children[j].classList.remove('period');
         }
       }
     }
