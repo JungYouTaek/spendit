@@ -5,6 +5,14 @@
   font-family: 'Lato', sans-serif;
 }
 
+body {
+  width: 500px;
+  margin: 0 auto;
+}
+
+main h1 {
+  text-align: center;
+}
 input[type="date"]::-webkit-inner-spin-button { 
   -webkit-appearance: none;
   display: none;
@@ -22,11 +30,12 @@ main::after {
 
 .calendar {
   float: left;
-  border: 2px solid #042C54;
+  border: 3px solid #042C54;
+  border-bottom: 2px solid #042C54;
 }
 
 .calendar__table  {
-  width: 240px;
+  width: 220px;
   border-collapse: collapse;
 }
 
@@ -64,7 +73,7 @@ main::after {
 
 .datepicker {
   display: inline-block;
-  width: 300px;
+  width: 180px;
   margin-left: 30px;
 }
 
@@ -120,10 +129,14 @@ main::after {
 .calendar__current--not {
   color: lightgray;
 }
-.someclass {
+.period {
   background-color: #ededed;
 }
 
-.checked {
-  background-color: blueviolet
+.calendar__table tbody .checked {
+  box-shadow: 0 0 10px #4c9be0 inset;
+  padding: 2px;
+  height: 26px;
+  color: black;
+  background-color: #a8cded;
 }
