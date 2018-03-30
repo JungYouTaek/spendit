@@ -99,3 +99,26 @@ const calendar = (
 };
 calendar();
 
+document.getElementById("calendar__before").addEventListener("click", () => {
+  const year =
+    document.getElementById("calendar__date").textContent.slice(5) === "01"
+      ? document.getElementById("calendar__date").textContent.slice(0, 4) - 1
+      : document.getElementById("calendar__date").textContent.slice(0, 4);
+  const month =
+    document.getElementById("calendar__date").textContent.slice(5) === "01"
+      ? 11
+      : document.getElementById("calendar__date").textContent.slice(5) - 2;
+  calendar(year, month);
+});
+
+document.getElementById("calendar__after").addEventListener("click", () => {
+  const year =
+    document.getElementById("calendar__date").textContent.slice(5) === "12"
+      ? +document.getElementById("calendar__date").textContent.slice(0, 4) + 1
+      : +document.getElementById("calendar__date").textContent.slice(0, 4);
+  const month =
+    document.getElementById("calendar__date").textContent.slice(5) === "12"
+      ? 0
+      : +document.getElementById("calendar__date").textContent.slice(5);
+  calendar(year, month);
+});
