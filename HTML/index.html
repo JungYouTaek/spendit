@@ -9,9 +9,46 @@
   <meta name="description" content="스팬딧 프론트엔드 테스트">
   <meta name="author" content="youtaek">
   <meta name="keywords" content="spendit, frontend">
+  <link rel="stylesheet" href="./main.css">
   <title>Spendit</title>
 </head>
 <body>
-  
+  <div class="calendar">
+    <table id="calendar__table" class="calendar__table">
+      <thead>
+        <tr>
+          <th id="calendar__before"><</th>
+          <th id="calendar__date" colspan="5"></th>
+          <th id="calendar__after">></th>
+        </tr>
+        <tr>
+          <th>Sun</th>
+          <th>Mon</th>
+          <th>Tue</th>
+          <th>Wed</th>
+          <th>Thu</th>
+          <th>Fri</th>
+          <th>Sat</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <div id="from-date" class="datepicker">
+    <label>From</label>
+    <input class="datepicker__input" type="date" name="selected_date" />
+    <span class="datepicker__btn">
+      <button type="button"><i class="fas fa-calendar-alt"></i></button>
+    </span>
+  </div>
+  <div id="to-date" class="datepicker">
+    <label>To</label>
+    <input class="datepicker__input" type="date" name="selected_date" />
+    <span class="datepicker__btn">
+      <button type="button"><i class="fas fa-calendar-alt"></i></button>
+    </span>
+  </div>
+  <button>적용</button>
+  <script src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
+  <script src="./main.js"></script>
 </body>
 </html>
