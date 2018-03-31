@@ -151,3 +151,24 @@ main::after {
   color: inherit;
   background-color: #a8cded;
 }
+
+.breakdown {
+  margin-top: 50px;
+}
+.breakdown .breakdown__heading {
+  display: inline-block;
+  height: 30px;
+  margin: 0 20px 0 0 ;
+}
+
+.breakdown .breakdown__reset {
+  display: inline-block;
+  width: 100px;
+  height: 30px;
+  line-height: 25px;
+  background-color: #ef2828;
+  border: none;
+  color: #ffffff;
+  font-size: 15px;
+  vertical-align: top;
+}
