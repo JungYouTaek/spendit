@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Lato');
 
+/* entire */
 * {
   box-sizing: border-box;
   font-family: 'Lato', sans-serif;
@@ -8,17 +9,6 @@
 body {
   width: 480px;
   margin: 0 auto;
-}
-
-main h1 {
-  margin: 20px 0;
-  font-size: 35px;
-  font-weight: bold;
-  text-align: center;
-}
-input[type="date"]::-webkit-inner-spin-button { 
-  -webkit-appearance: none;
-  display: none;
 }
 
 main {
@@ -30,6 +20,15 @@ main::after {
   content: '';
   clear: both;
 }
+
+main h1 {
+  margin: 20px 0;
+  font-size: 35px;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* calendar */
 
 .calendar {
   float: left;
@@ -43,16 +42,16 @@ main::after {
 }
 
 .calendar__table thead {
-  color: white;
   background-color: #042C54;
+  color: white;
 }
 
 .calendar__table thead .calendar__date {
   height: 40px;
   line-height: 40px;
-  vertical-align: middle;
   font-size: 15px;
   font-weight: normal;
+  vertical-align: middle;
 }
 
 .calendar__table thead .calendar__date .calendar__date--move {
@@ -62,9 +61,9 @@ main::after {
 .calendar__table thead .calendar__day {
   height: 20px;
   line-height: 20px;
-  vertical-align: middle;
   font-size: 10px;
   font-weight: thin;
+  vertical-align: middle;
 }
 
 .calendar__table tbody tr {
@@ -75,10 +74,26 @@ main::after {
   width: 30px;
   height: 28px;
   line-height: 28px;
-  vertical-align: middle;
-  text-align: center;
   font-size: 12px;
+  text-align: center;
+  vertical-align: middle;
 }
+
+.calendar__current--not {
+  color: lightgray;
+}
+.calendar__period {
+  background-color: #ededed;
+}
+
+.calendar__table tbody .checked {
+  height: 26px;
+  box-shadow: 0 0 10px #4c9be0 inset;
+  background-color: #a8cded;
+  color: inherit;
+}
+
+/* datepicker */
 
 .datepicker {
   display: inline-block;
@@ -98,12 +113,17 @@ main::after {
   border: 1px solid #cecece;
   border-radius: 2px;
 }
+
+.datepicker__wrapper .datepicker__input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  display: none;
+}
+
 .datepicker__wrapper .datepicker__input {
   width: 168px;
   height: 38px;
+  padding: 0 10px;
   border: none;
-  padding-left: 10px;
-  padding-right: 10px;
   font-size: 15px;
 }
 
@@ -120,8 +140,8 @@ main::after {
   height: 28px;
   margin-top: -11px;
   padding-right: 5px;
-  text-align: right;
   background-color: white;
+  text-align: right;
   pointer-events: none;
 }
 
@@ -131,8 +151,8 @@ main::after {
 
 .datepicker__wrapper .datepicker__btn button {
   border: none;
-  color: #cecece;
   background: transparent;
+  color: #cecece;
 }
 
 .alert {
@@ -141,24 +161,12 @@ main::after {
   margin-top: 30px;
   margin-left: 50px;
   border: none;
-  color: #ffffff;
-  font-size: 15px;
   background-color: #0e7cd6;
+  font-size: 15px;
+  color: #ffffff;
 }
 
-.calendar__current--not {
-  color: lightgray;
-}
-.period {
-  background-color: #ededed;
-}
-
-.calendar__table tbody .checked {
-  box-shadow: 0 0 10px #4c9be0 inset;
-  height: 26px;
-  color: inherit;
-  background-color: #a8cded;
-}
+/* breakdown */
 
 .breakdown {
   margin-top: 50px;
@@ -167,10 +175,10 @@ main::after {
   display: inline-block;
   height: 30px;
   line-height: 30px;
-  vertical-align: middle;
+  margin: 0 20px 0 0 ;
   font-size: 23px;
   font-weight: bold;
-  margin: 0 20px 0 0 ;
+  vertical-align: middle;
 }
 
 .breakdown .breakdown__reset {
@@ -178,10 +186,10 @@ main::after {
   width: 100px;
   height: 30px;
   line-height: 25px;
-  background-color: #ef2828;
   border: none;
-  color: #ffffff;
+  background-color: #ef2828;
   font-size: 15px;
+  color: #ffffff;
   vertical-align: top;
 }
 
