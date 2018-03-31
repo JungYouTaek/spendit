@@ -1,8 +1,6 @@
-// Array.prototype.forEach.call(
-//   document.getElementsByClassName("datepicker__input"),
-//   input => (input.value = new Date().toISOString().slice(0, 10))
-// );
-let check = 0, start, end;
+// calender handling
+
+let check = 0, start = '', end = '', len = localStorage.length;
 const calendar = (
   year = new Date().getFullYear(),
   month = new Date().getMonth()
@@ -62,13 +60,23 @@ const calendar = (
     for ( let i = 0; i <= 5; i++ ) {
       for ( let j = 0; j <= 6; j++ ) {
         let title = document.getElementById("calendar__num").children[i].children[j].dataset.title;
-          if ( +start.dataset.title === +title || +end.dataset.title === +title ) {
-            document.getElementById("calendar__num")
-              .children[i].children[j].classList.add("checked")
-          } else if ( +start.dataset.title < +title && +end.dataset.title > +title ) {
-            document.getElementById("calendar__num")
-              .children[i].children[j].classList.add("period");
-          }
+        if ( +start.dataset.title === +title || +end.dataset.title === +title ) {
+          document.getElementById("calendar__num")
+            .children[i].children[j].classList.add("checked")
+        } else if ( +start.dataset.title < +title && +end.dataset.title > +title ) {
+          document.getElementById("calendar__num")
+            .children[i].children[j].classList.add("period");
+        }
+      }
+    }
+  } else if ( start ) {
+    for ( let i = 0; i <= 5; i++ ) {
+      for ( let j = 0; j <= 6; j++ ) {
+        let title = document.getElementById("calendar__num").children[i].children[j].dataset.title;
+        if ( +start.dataset.title === +title ) {
+          document.getElementById("calendar__num")
+            .children[i].children[j].classList.add("checked")
+        }
       }
     }
   }
@@ -82,30 +90,39 @@ const calendar = (
           document.getElementById('calendar__num').children[i].children[j].classList.remove('checked')
         }
       }
-      e.target.setAttribute("class", "checked");
-      document.getElementsByClassName(
-        "datepicker__input"
-      )[0].value = `${e.target.dataset.title.slice(0,4)}-${e.target.dataset.title.slice(4,6)}-${e.target.dataset.title.slice(6)}`;
-      document.getElementsByClassName(
-        "datepicker__input"
-      )[1].value = '';
-      start = e.target;
-      end = '';
+      e.target.classList.add("checked");
+      document.getElementById(
+        "from-date"
+      ).value = `${e.target.dataset.title.slice(0,4)}-${e.target.dataset.title.slice(4,6)}-${e.target.dataset.title.slice(6)}`;
+      document.getElementById("to-date").value = '';
+      start = e.target, end = '';
+      if ( document.getElementById('to-date').disabled ) {
+        document.getElementsByClassName('datepicker__btn--disalbed')[0].classList.remove('datepicker__btn--disalbed');
+        document.getElementById('to-date').disabled = false;
+      }
     } else {
-      if ( +start.dataset.title < +e.target.dataset.title ) {
+      if ( +start.dataset.title <= +e.target.dataset.title ) {
         check--;
-        e.target.setAttribute("class", "checked");
-        document.getElementsByClassName(
-          "datepicker__input"
-        )[1].value = `${e.target.dataset.title.slice(0,4)}-${e.target.dataset.title.slice(4,6)}-${e.target.dataset.title.slice(6)}`;
+        e.target.classList.add("checked");
+        document.getElementById(
+          "to-date"
+        ).value = `${e.target.dataset.title.slice(0,4)}-${e.target.dataset.title.slice(4,6)}-${e.target.dataset.title.slice(6)}`;
         end = e.target;
+        if ( document.getElementById('to-date').disabled ) {
+          document.getElementsByClassName('datepicker__btn--disalbed')[0].classList.remove('datepicker__btn--disalbed');
+          document.getElementById('to-date').disabled = false;
+        }
       } else {
         start.classList.remove("checked");
-        e.target.setAttribute("class", "checked");
+        e.target.classList.add("checked");
         start = e.target;
-        document.getElementsByClassName(
-          "datepicker__input"
-        )[0].value = `${e.target.dataset.title.slice(0,4)}-${e.target.dataset.title.slice(4,6)}-${e.target.dataset.title.slice(6)}`;
+        document.getElementById(
+          "from-date"
+        ).value = `${e.target.dataset.title.slice(0,4)}-${e.target.dataset.title.slice(4,6)}-${e.target.dataset.title.slice(6)}`;
+        if ( document.getElementById('to-date').disabled ) {
+          document.getElementsByClassName('datepicker__btn--disalbed')[0].classList.add('datepicker__btn--disalbed');
+          document.getElementById('to-date').disabled = true;
+        }
       }
     }
   });
@@ -159,3 +176,68 @@ document.getElementById("calendar__after").addEventListener("click", () => {
       : +document.getElementById("calendar__date").textContent.slice(5);
   calendar(year, month);
 });
+
+// input box handling
+
+document.getElementById("from-date").addEventListener("change", e => {
+  calendar(+e.target.value.slice(0,4), +e.target.value.slice(5,7)-1)
+  document.getElementById("from-date").setAttribute('data-title', e.target.value.replace(/-/g, ''))
+  if ( start && end && start.dataset.title > end.dataset.title ) {
+    document.getElementById('to-date').value = '';
+    start = e.target;
+  } else {
+    check++, start = e.target, end = '';
+  }
+  for ( let i = 0; i <= 5; i++ ) {
+    for ( let j = 0; j <= 6; j++ ) {
+      document.getElementById('calendar__num').children[i].children[j].classList.remove('period');
+      document.getElementById('calendar__num').children[i].children[j].classList.remove('checked');
+      if ( e.target.dataset.title === document.getElementById('calendar__num').children[i].children[j].dataset.title ) {
+        document.getElementById('calendar__num').children[i].children[j].classList.add('checked');
+      }
+    }
+  }
+  if ( document.getElementById('to-date').disabled ) {
+    document.getElementsByClassName('datepicker__btn--disalbed')[0].classList.remove('datepicker__btn--disalbed');
+    document.getElementById('to-date').disabled = false;
+  }
+})
+
+document.getElementById("to-date").addEventListener("change", e => {
+  
+  document.getElementById("to-date").setAttribute('data-title', e.target.value.replace(/-/g, ''))
+  if ( +document.getElementById("to-date").dataset.title < +start.dataset.title ) {
+    alert('기준일 이후의 날짜를 입력해주세요')
+    console.log(start.dataset.title, 'sad')
+    calendar(+start.dataset.title.slice(0,4), +start.dataset.title.slice(4,6)-1)
+    document.getElementById("to-date").value = '';
+    for ( let i = 0; i <= 5; i++ ) {
+      for ( let j = 0; j <= 6; j++ ) {
+        document.getElementById('calendar__num').children[i].children[j].classList.remove('period');
+        document.getElementById('calendar__num').children[i].children[j].classList.remove('checked');
+        let title = document.getElementById("calendar__num").children[i].children[j].dataset.title;
+        if (+start.dataset.title === +title ) {
+          document.getElementById("calendar__num")
+            .children[i].children[j].classList.add("checked");
+        }
+      }
+    }
+  } else {
+    calendar(+e.target.value.slice(0,4), +e.target.value.slice(5,7)-1)
+    check--, end = e.target;
+    for ( let i = 0; i <= 5; i++ ) {
+      for ( let j = 0; j <= 6; j++ ) {
+        document.getElementById('calendar__num').children[i].children[j].classList.remove('period');
+        document.getElementById('calendar__num').children[i].children[j].classList.remove('checked');
+        let title = document.getElementById("calendar__num").children[i].children[j].dataset.title;
+        if ( +start.dataset.title < +title && +end.dataset.title > +title ) {
+          document.getElementById("calendar__num")
+            .children[i].children[j].classList.add("period");
+        } else if (+end.dataset.title === +title || +start.dataset.title === +title ) {
+          document.getElementById("calendar__num")
+            .children[i].children[j].classList.add("checked");
+        }
+      }
+    }
+  }
+})
