@@ -37,8 +37,8 @@
       </div>
       <div class="datepicker">
         <p>From</p>
-        <div id="from-date" class="datepicker__wrapper">
-          <input class="datepicker__input" type="date" name="selected_date" />
+        <div class="datepicker__wrapper">
+          <input id="from-date" class="datepicker__input" type="date" name="selected_date" />
           <span class="datepicker__btn">
             <button type="button">
               <i class="fas fa-calendar-alt fa-lg"></i>
@@ -46,15 +46,20 @@
           </span>
         </div>
         <p>To</p>
-        <div id="to-date" class="datepicker__wrapper">
-          <input class="datepicker__input" type="date" name="selected_date" />
-          <span class="datepicker__btn">
+        <div class="datepicker__wrapper">
+          <input id="to-date" class="datepicker__input" type="date" name="selected_date" disabled />
+          <span id="to-date__btn" class="datepicker__btn datepicker__btn--disalbed">
             <button type="button">
               <i class="fas fa-calendar-alt fa-lg"></i>
             </button>
           </span>
         </div>
-        <button class="apply">적용</button>
+        <button id="alert" class="alert">적용</button>
+      </div>
+      <div>
+        <h2>조회 기록</p>
+        <button id="breakdown__reset">초기화</button>
+        <div id="breakdown"></div>
       </div>
     </main>
     <script src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl"
