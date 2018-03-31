@@ -94,7 +94,13 @@ main::after {
   height: 38px;
   border: none;
   padding-left: 10px;
+  padding-right: 10px;
   font-size: 15px;
+}
+
+.datepicker__wrapper .datepicker__input:disabled {
+  background-color: #cecece;
+  cursor: not-allowed;
 }
 
 .datepicker__wrapper .datepicker__btn {
@@ -102,11 +108,16 @@ main::after {
   top: 50%;
   right: 3px;
   width: 50px;
-  height: 30px;
-  margin-top: -12px;
+  height: 28px;
+  margin-top: -11px;
+  padding-right: 5px;
   text-align: right;
-  background: #fff;
+  background-color: white;
   pointer-events: none;
+}
+
+.datepicker__wrapper .datepicker__btn--disalbed {
+  background-color: #cecece;
 }
 
 .datepicker__wrapper .datepicker__btn button {
@@ -115,7 +126,7 @@ main::after {
   background: transparent;
 }
 
-.apply {
+.alert {
   width: 120px;
   height: 34px;
   margin-top: 30px;
@@ -137,6 +148,6 @@ main::after {
   box-shadow: 0 0 10px #4c9be0 inset;
   padding: 2px;
   height: 26px;
-  color: black;
+  color: inherit;
   background-color: #a8cded;
 }
