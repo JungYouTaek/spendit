@@ -68,7 +68,7 @@ const calendar = (
         }">${nextNum}</td>`;
         nextNum++;
       } else {
-        text += `<td class="calendar__currnet" data-title="${displayDate.slice(0,4)
+        text += `<td data-title="${displayDate.slice(0,4)
         }${displayDate.slice(5)}${
           ("" + currentNum).length === 1 ? "0" + currentNum : currentNum
         }">${currentNum}</td>`;
@@ -96,7 +96,7 @@ const calendar = (
             .children[i].children[j].classList.add("checked");
         } else if ( +start.dataset.title < +title && +end.dataset.title > +title ) {
           document.getElementById("calendar__num")
-            .children[i].children[j].classList.add("period");
+            .children[i].children[j].classList.add("calendar__period");
         }
       }
     }
@@ -119,7 +119,7 @@ const calendar = (
       for (let i = 0; i <= 5; i++) {
         for (let j = 0; j <= 6; j++) {
           document.getElementById("calendar__num")
-            .children[i].children[j].classList.remove("period", "checked");
+            .children[i].children[j].classList.remove("calendar__period", "checked");
         }
       }
       e.target.classList.add("checked");
@@ -167,7 +167,7 @@ const calendar = (
             .children[j].dataset.title;
           if ( +start.dataset.title < +title && +e.target.dataset.title >= +title ) {
             document.getElementById("calendar__num")
-              .children[i].children[j].classList.add("period");
+              .children[i].children[j].classList.add("calendar__period");
           }
         }
       }
@@ -179,7 +179,7 @@ const calendar = (
       for (let i = 0; i <= 5; i++) {
         for (let j = 0; j <= 6; j++) {
           document.getElementById("calendar__num")
-            .children[i].children[j].classList.remove("period");
+            .children[i].children[j].classList.remove("calendar__period");
         }
       }
     }
@@ -222,7 +222,7 @@ document.getElementById("from-date").addEventListener("change", e => {
   for (let i = 0; i <= 5; i++) {
     for (let j = 0; j <= 6; j++) {
       document.getElementById("calendar__num")
-        .children[i].children[j].classList.remove("period", "checked");
+        .children[i].children[j].classList.remove("calendar__period", "checked");
       if ( e.target.dataset.title ===
         document.getElementById("calendar__num").children[i].children[j].dataset.title ) {
         document.getElementById("calendar__num")
@@ -248,7 +248,7 @@ document.getElementById("to-date").addEventListener("change", e => {
     for (let i = 0; i <= 5; i++) {
       for (let j = 0; j <= 6; j++) {
         document.getElementById("calendar__num")
-          .children[i].children[j].classList.remove("period", "checked");
+          .children[i].children[j].classList.remove("calendar__period", "checked");
         let title = document.getElementById("calendar__num").children[i]
           .children[j].dataset.title;
         if (+start.dataset.title === +title) {
@@ -263,12 +263,12 @@ document.getElementById("to-date").addEventListener("change", e => {
     for (let i = 0; i <= 5; i++) {
       for (let j = 0; j <= 6; j++) {
         document.getElementById("calendar__num")
-          .children[i].children[j].classList.remove("period", "checked");
+          .children[i].children[j].classList.remove("calendar__period", "checked");
         let title = document.getElementById("calendar__num").children[i]
           .children[j].dataset.title;
         if (+start.dataset.title < +title && +end.dataset.title > +title) {
           document.getElementById("calendar__num")
-            .children[i].children[j].classList.add("period");
+            .children[i].children[j].classList.add("calendar__period");
         } else if ( +end.dataset.title === +title || +start.dataset.title === +title ) {
           document.getElementById("calendar__num")
             .children[i].children[j].classList.add("checked");
