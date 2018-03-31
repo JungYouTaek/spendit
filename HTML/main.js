@@ -241,3 +241,37 @@ document.getElementById("to-date").addEventListener("change", e => {
     }
   }
 })
+
+// button handling
+
+document.getElementById('alert').addEventListener("click", () => {
+  const fromDate = document.getElementById('from-date').value, toDate = document.getElementById('to-date').value;
+  if ( fromDate && toDate ) {
+    let data = `${fromDate.replace('-', '년 ').replace('-', '월 ')}일 ~ ${toDate.replace('-', '년 ').replace('-', '월 ')}일 (총 ${
+      ((new Date(+toDate.slice(0,4), +toDate.slice(5, 7)-1, +toDate.slice(8)) - new Date(+fromDate.slice(0,4), +fromDate.slice(5, 7)-1, +fromDate.slice(8)))/ 1000 / 60 / 60 / 24) + 1
+    }일)`
+    alert(data);
+    start = '', end = '';
+    len = localStorage.length;
+    localStorage.setItem(len, data);
+    if ( document.getElementById('breakdown').firstChild ) {
+      let breakdown = document.createElement("p"), text = "";
+      text += `${len} : ${localStorage.getItem(len)}`
+      breakdown.innerHTML = text;
+      document.getElementById('breakdown').firstChild.appendChild(breakdown);
+    } else {
+      let breakdown = document.createElement("div"), text = "";
+      text += `<p>${len} : ${localStorage.getItem(len)}</p>`
+      breakdown.innerHTML = text;
+      document.getElementById('breakdown').appendChild(breakdown);
+    }
+
+    document.getElementById('from-date').value = '';
+    document.getElementById('to-date').value = '';
+    document.getElementById('to-date').disabled = true;
+    document.getElementById('to-date__btn').classList.add('datepicker__btn--disalbed');
+    calendar();
+  } else {
+    alert('조회할 날짜를 올바르게 입력해주세요')
+  }
+})
