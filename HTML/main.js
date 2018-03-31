@@ -275,3 +275,20 @@ document.getElementById('alert').addEventListener("click", () => {
     alert('조회할 날짜를 올바르게 입력해주세요')
   }
 })
+
+// breakdown handling
+
+if ( localStorage.length ) {
+  let breakdown = document.createElement("div"), text = "";
+  for ( let i = 0; i < localStorage.length; i++ ) {
+    text += `<p>${i} : ${localStorage.getItem(i)}</p>`
+  }
+  breakdown.innerHTML = text;
+  document.getElementById('breakdown').appendChild(breakdown)
+}
+
+document.getElementById("breakdown__reset").addEventListener('click', () => {
+  localStorage.clear();
+  len = 0;
+  document.getElementById('breakdown').removeChild(document.getElementById('breakdown').firstChild)
+})
