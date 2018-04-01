@@ -15,12 +15,10 @@
     "watch-css": "yarn run build-css --watch --recursive",
     "start-js": "cross-env NODE_PATH=src react-scripts start",
     "start": "npm-run-all -p watch-css start-js",
-    "build": "cross-env NODE_PATH=src react-scripts build",
-    "serve": "serve -s build"
+    "build": "cross-env NODE_PATH=src react-scripts build"
   },
   "devDependencies": {
-    "cross-env": "^5.1.4",
-    "serve": "^6.5.3"
-  },
-  "homepage": "https://optimistic-kilby-7ad7b2.netlify.com/"
+    "netlify-cli": "^1.2.2",
+    "cross-env": "^5.1.4"
+  }
 }
