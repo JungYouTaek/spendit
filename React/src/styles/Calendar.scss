@@ -1,0 +1,66 @@
+.calendar {
+  float: left;
+  border: 3px solid #042C54;
+  border-bottom: 2px solid #042C54;
+
+  .calendar__table  {
+    width: 220px;
+    border-collapse: collapse;
+
+    thead {
+      background-color: #042C54;
+      color: white;
+
+      .calendar__date {
+        height: 40px;
+        line-height: 40px;
+        font-size: 15px;
+        font-weight: normal;
+        vertical-align: middle;
+
+        .calendar__date--move {
+          cursor: pointer;
+        }
+      }
+
+      .calendar__day {
+        height: 20px;
+        line-height: 20px;
+        font-size: 10px;
+        font-weight: thin;
+        vertical-align: middle;
+      }
+    }
+
+    tbody {
+
+      tr {
+        border: 2px solid #ffffff;
+      }
+
+      td {
+        width: 30px;
+        height: 28px;
+        line-height: 28px;
+        font-size: 12px;
+        text-align: center;
+        vertical-align: middle;
+      }
+    }
+  }
+
+  .calendar__current--not {
+    color: lightgray;
+  }
+
+  .calendar__period {
+    background-color: #ededed;
+  }
+
+  .calendar__table tbody .checked {
+    height: 26px;
+    box-shadow: 0 0 10px #4c9be0 inset;
+    background-color: #a8cded;
+    color: inherit;
+  }
+}

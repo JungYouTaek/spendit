@@ -1,0 +1,30 @@
+.breakdown {
+  margin-top: 50px;
+
+  .breakdown__heading {
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
+    margin: 0 20px 0 0 ;
+    font-size: 23px;
+    font-weight: bold;
+    vertical-align: middle;
+  }
+
+  .breakdown__reset {
+    display: inline-block;
+    width: 100px;
+    height: 30px;
+    line-height: 25px;
+    border: none;
+    background-color: #ef2828;
+    font-size: 15px;
+    color: #ffffff;
+    vertical-align: top;
+  }
+
+  .breakdown__div p {
+    margin: 10px 0;
+    font-size: 15px;
+  }
+}

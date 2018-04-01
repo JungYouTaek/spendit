@@ -1,0 +1,20 @@
+@import url("https://fonts.googleapis.com/css?family=Lato");
+/* entire */
+* {
+  box-sizing: border-box;
+  font-family: 'Lato', sans-serif; }
+
+body {
+  width: 480px;
+  margin: 0 auto; }
+  body main {
+    padding: 20px; }
+    body main h1 {
+      margin: 20px 0;
+      font-size: 35px;
+      font-weight: bold;
+      text-align: center; }
+    body main::after {
+      display: block;
+      content: '';
+      clear: both; }
