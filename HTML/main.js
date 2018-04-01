@@ -8,10 +8,8 @@ const calendar = (
   year = new Date().getFullYear(),
   month = new Date().getMonth()
 ) => {
-  let date = new Date(),
-    y = year,
+  let y = year,
     m = month,
-    d = date.getDate(),
     theDate = new Date(y, m, 1),
     theDay = theDate.getDay();
   const monthDate = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
@@ -114,46 +112,48 @@ const calendar = (
   }
 
   child.addEventListener("click", e => {
-    if (check === 0) {
-      check = 1;
-      for (let i = 0; i <= 5; i++) {
-        for (let j = 0; j <= 6; j++) {
-          document.getElementById("calendar__num")
-            .children[i].children[j].classList.remove("calendar__period", "checked");
+    if ( e.target.tagName === 'TD' ) {
+      if (check === 0) {
+        check = 1;
+        for (let i = 0; i <= 5; i++) {
+          for (let j = 0; j <= 6; j++) {
+            document.getElementById("calendar__num")
+              .children[i].children[j].classList.remove("calendar__period", "checked");
+          }
         }
-      }
-      e.target.classList.add("checked");
-      document.getElementById("from-date").value = `${e.target.dataset.title.slice(0,4)
-      }-${e.target.dataset.title.slice(4, 6)}-${e.target.dataset.title.slice(6)}`;
-      document.getElementById("to-date").value = "";
-      start = e.target, end = "";
-      if (document.getElementById("to-date").disabled) {
-        document.getElementsByClassName("datepicker__btn--disalbed")[0]
-          .classList.remove("datepicker__btn--disalbed");
-        document.getElementById("to-date").disabled = false;
-      }
-    } else {
-      if (+start.dataset.title <= +e.target.dataset.title) {
-        check = 0;
         e.target.classList.add("checked");
-        document.getElementById("to-date").value = `${e.target.dataset.title.slice(0,4)
+        document.getElementById("from-date").value = `${e.target.dataset.title.slice(0,4)
         }-${e.target.dataset.title.slice(4, 6)}-${e.target.dataset.title.slice(6)}`;
-        end = e.target;
+        document.getElementById("to-date").value = "";
+        start = e.target, end = "";
         if (document.getElementById("to-date").disabled) {
           document.getElementsByClassName("datepicker__btn--disalbed")[0]
             .classList.remove("datepicker__btn--disalbed");
           document.getElementById("to-date").disabled = false;
         }
       } else {
-        start.classList.remove("checked");
-        e.target.classList.add("checked");
-        start = e.target;
-        document.getElementById("from-date").value = `${e.target.dataset.title.slice(0,4)
-        }-${e.target.dataset.title.slice(4, 6)}-${e.target.dataset.title.slice(6)}`;
-        if (document.getElementById("to-date").disabled) {
-          document.getElementsByClassName("datepicker__btn--disalbed")[0]
-            .classList.add("datepicker__btn--disalbed");
-          document.getElementById("to-date").disabled = true;
+        if (+start.dataset.title <= +e.target.dataset.title) {
+          check = 0;
+          e.target.classList.add("checked");
+          document.getElementById("to-date").value = `${e.target.dataset.title.slice(0,4)
+          }-${e.target.dataset.title.slice(4, 6)}-${e.target.dataset.title.slice(6)}`;
+          end = e.target;
+          if (document.getElementById("to-date").disabled) {
+            document.getElementsByClassName("datepicker__btn--disalbed")[0]
+              .classList.remove("datepicker__btn--disalbed");
+            document.getElementById("to-date").disabled = false;
+          }
+        } else {
+          start.classList.remove("checked");
+          e.target.classList.add("checked");
+          start = e.target;
+          document.getElementById("from-date").value = `${e.target.dataset.title.slice(0,4)
+          }-${e.target.dataset.title.slice(4, 6)}-${e.target.dataset.title.slice(6)}`;
+          if (document.getElementById("to-date").disabled) {
+            document.getElementsByClassName("datepicker__btn--disalbed")[0]
+              .classList.add("datepicker__btn--disalbed");
+            document.getElementById("to-date").disabled = true;
+          }
         }
       }
     }

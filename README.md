@@ -1,5 +1,11 @@
 # Spendit frontend test
 
+- HTML, React 두가지 버전
+
+## 배포된 주소
+
+- [HTML](https://eloquent-roentgen-9bd1ca.netlify.com/)
+
 ## 기능
 
 ### 달력
