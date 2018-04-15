@@ -1,4 +1,4 @@
-# Spendit frontend test
+# JavaScript Calendar
 
 - HTML + CSS + JavaScript ver.
 - React + SCSS ver.
