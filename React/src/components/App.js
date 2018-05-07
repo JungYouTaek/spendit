@@ -355,7 +355,7 @@ class App extends Component {
   render() {
     return (
       <main>
-        <h1>Spendit frontend test</h1>
+        <h1>JavaScript-calendar</h1>
         <Calendar handleCalendar={this.handleCalendar} />
         <Datepicker
           handleCalendar={this.handleCalendar}
