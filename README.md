@@ -5,8 +5,7 @@
 
 ## 배포된 주소
 
-- [HTML](https://eloquent-roentgen-9bd1ca.netlify.com/)
-- [React](https://wizardly-snyder-8f1704.netlify.com/)
+- [https://eloquent-roentgen-9bd1ca.netlify.com/](https://eloquent-roentgen-9bd1ca.netlify.com/)
 
 ## 기능
 
